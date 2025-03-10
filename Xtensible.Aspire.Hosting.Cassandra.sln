@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156 d17.13
+VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xtensible.Aspire.Hosting.Cassandra", "src\Xtensible.Aspire.Hosting.Cassandra\Xtensible.Aspire.Hosting.Cassandra.csproj", "{ED39DBB2-620E-4241-B56C-B0E09E96F2E7}"
 EndProject
@@ -15,6 +15,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xtensible.Aspire.Hosting.Cassandra.Demo.ServiceDefaults", "src\Xtensible.Aspire.Hosting.Cassandra.Demo\Xtensible.Aspire.Hosting.Cassandra.Demo.ServiceDefaults\Xtensible.Aspire.Hosting.Cassandra.Demo.ServiceDefaults.csproj", "{4E56020C-1D97-7067-F9B4-98D6A14F5241}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xtensible.Aspire.Hosting.Cassandra.Tests", "test\Xtensible.Aspire.Hosting.Cassandra.Tests\Xtensible.Aspire.Hosting.Cassandra.Tests.csproj", "{15D8A418-6705-4A64-AA8B-EFCD0F78F2D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xtensible.Cassandra.Healthchecks", "src\Xtensible.Cassandra.Healthchecks\Xtensible.Cassandra.Healthchecks.csproj", "{02ED9326-E228-4744-B399-4F172C116EEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{15D8A418-6705-4A64-AA8B-EFCD0F78F2D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15D8A418-6705-4A64-AA8B-EFCD0F78F2D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15D8A418-6705-4A64-AA8B-EFCD0F78F2D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02ED9326-E228-4744-B399-4F172C116EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02ED9326-E228-4744-B399-4F172C116EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02ED9326-E228-4744-B399-4F172C116EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02ED9326-E228-4744-B399-4F172C116EEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

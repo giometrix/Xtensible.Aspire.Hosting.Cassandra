@@ -45,11 +45,11 @@ public class CassandraResource(string name, ParameterResource? userName = null, 
     public CassandraImageSettings ImageSettings { get; } = imageSettings ?? CassandraImageSettings.Default;
 
 
-    private ReferenceExpression UsernameReference => UsernameParameter is not null ? 
+    internal ReferenceExpression UsernameReference => UsernameParameter is not null ? 
         ReferenceExpression.Create($"{UsernameParameter}") :
         ReferenceExpression.Create($"{DefaultUserName}");
 
-    private ReferenceExpression PasswordReference => PasswordParameter is not null ?
+    internal ReferenceExpression PasswordReference => PasswordParameter is not null ?
         ReferenceExpression.Create($"{PasswordParameter}") :
         ReferenceExpression.Create($"{DefaultPassword}");
 }

@@ -1,5 +1,9 @@
 ﻿using Aspire.Hosting;
 using Aspire.Hosting.ApplicationModel;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Reflection.Metadata.Ecma335;
+using Xtensible.Cassandra.HealthChecks;
 
 namespace Xtensible.Aspire.Hosting.Cassandra;
 
@@ -18,6 +22,19 @@ public static class CassandraBuilderExtensions
 
         var resource = new CassandraResource(name, userName?.Resource, password?.Resource);
 
+
+        //builder.Services.AddSingleton<CassandraHealthCheckConfig>(new CassandraHealthCheckConfig("aaa",async () => await resource.UsernameReference.GetValueAsync(CancellationToken.None), $"{resource.PasswordReference}", 9042));
+
+        //builder.Services.AddHealthChecks().AddCheck<CassandraHealthCheck>(name);
+
+        builder.Services.AddHealthChecks().AddAsyncCheck(name, async (cancellationToken) =>
+        {
+            var config = new CassandraHealthCheckConfig((await resource.PrimaryEndpoint.Property(EndpointProperty.Host).GetValueAsync(cancellationToken))!, (await resource.UsernameReference.GetValueAsync(CancellationToken.None))!, (await resource.UsernameReference.GetValueAsync(CancellationToken.None))!, 9042);
+            var healthCheck = new CassandraHealthCheck(config);
+            return await healthCheck.CheckHealthAsync(new HealthCheckContext(), cancellationToken);
+        });
+
+
         return builder.Build(port, resource);
     }
 
@@ -26,7 +43,8 @@ public static class CassandraBuilderExtensions
         IResourceBuilder<CassandraResource> result = builder.AddResource(cassandra)
             .WithImage(cassandra.ImageSettings.Image, cassandra.ImageSettings.Tag)
             .WithImageRegistry(cassandra.ImageSettings.Registry)
-            .WithEndpoint(port: port, targetPort: 9042, name: CassandraResource.PrimaryEndpointName, scheme: CassandraResource.PrimaryEndpointName);
+            .WithEndpoint(port: port, targetPort: 9042, name: CassandraResource.PrimaryEndpointName, scheme: CassandraResource.PrimaryEndpointName)
+            .WithHealthCheck("cassandra"); // todo: figure out how to parameterize. figure out why this isn't working
         return result; // todo: add health check
     }
 }
