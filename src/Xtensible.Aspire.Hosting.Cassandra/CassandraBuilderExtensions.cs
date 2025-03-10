@@ -10,8 +10,7 @@ public static class CassandraBuilderExtensions
         IResourceBuilder<ParameterResource>? userName = null,
         IResourceBuilder<ParameterResource>? password = null,
         int? port = null,
-        string scheme = "tcp",
-        int? webPort = null)
+        string scheme = "tcp")
     {
         ArgumentNullException.ThrowIfNull(builder, nameof(builder));
         ArgumentNullException.ThrowIfNull(name, nameof(name));
