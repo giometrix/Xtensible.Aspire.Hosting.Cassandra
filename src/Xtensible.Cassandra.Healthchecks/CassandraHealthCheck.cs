@@ -3,8 +3,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Xtensible.Cassandra.HealthChecks
 {
-
-    public record  CassandraHealthCheckConfig(string ContactPoint, string Username, string Password, int Port);
+    public record CassandraHealthCheckConfig(string ContactPoint, string Username, string Password, int Port);
 
     public class CassandraHealthCheck : IHealthCheck
     {
@@ -24,7 +23,6 @@ namespace Xtensible.Cassandra.HealthChecks
             {
                 if (_cluster is null)
                 {
-                    
                     Builder? builder = Cluster.Builder().AddContactPoint(_config.ContactPoint).WithPort(_config.Port);
 
                     if (!string.IsNullOrEmpty(_config.Username) && !string.IsNullOrEmpty(_config.Password))
@@ -36,9 +34,10 @@ namespace Xtensible.Cassandra.HealthChecks
                 }
 
                 using ISession? session = await _cluster.ConnectAsync();
-                using var rs = await session.ExecuteAsync(new SimpleStatement("SELECT release_version FROM system.local"));
+                using RowSet? rs =
+                    await session.ExecuteAsync(new SimpleStatement("SELECT release_version FROM system.local"));
 
-                var row = rs.FirstOrDefault();
+                Row? row = rs.FirstOrDefault();
                 if (row is not null)
                 {
                     return HealthCheckResult.Healthy($"Cassandra is up. Version: {row["release_version"]}");

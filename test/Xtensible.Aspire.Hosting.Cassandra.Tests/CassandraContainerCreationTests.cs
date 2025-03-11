@@ -24,7 +24,7 @@ namespace Xtensible.Aspire.Hosting.Cassandra.Tests
         public void add_cassandra_to_builder_should_not_have_null_or_whitespace_scheme()
         {
             IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder();
-            Assert.Throws<ArgumentNullException>(() => builder.AddCassandra(name: "cassandra", scheme: null!));
+            Assert.Throws<ArgumentNullException>(() => builder.AddCassandra("cassandra", scheme: null!));
         }
 
         [Fact]
@@ -32,12 +32,13 @@ namespace Xtensible.Aspire.Hosting.Cassandra.Tests
         {
             IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder();
 
-            builder.AddCassandra("cassandra", builder.AddParameter("username", "testuser"), builder.AddParameter("password", "testpass"));
-         
-            var app = builder.Build();
+            builder.AddCassandra("cassandra", builder.AddParameter("username", "testuser"),
+                builder.AddParameter("password", "testpass"));
+
+            DistributedApplication app = builder.Build();
             var appModel = app.Services.GetRequiredService<DistributedApplicationModel>();
 
-            var resource = appModel.Resources.OfType<CassandraResource>().Single();
+            CassandraResource resource = appModel.Resources.OfType<CassandraResource>().Single();
 
             Assert.Equal("cassandra", resource.Name);
             Assert.Equal("testuser", resource.UsernameParameter!.Value);
@@ -49,7 +50,6 @@ namespace Xtensible.Aspire.Hosting.Cassandra.Tests
             Assert.Equal("cassandra", imageAnnotations!.Image);
             Assert.Equal("latest", imageAnnotations!.Tag);
             Assert.Equal("docker.io", imageAnnotations!.Registry);
-
         }
     }
 }

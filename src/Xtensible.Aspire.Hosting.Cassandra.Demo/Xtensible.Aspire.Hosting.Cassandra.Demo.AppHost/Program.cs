@@ -1,7 +1,8 @@
 using Xtensible.Aspire.Hosting.Cassandra;
 
-var builder = DistributedApplication.CreateBuilder(args);
+IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
-var cassandra = builder.AddCassandra("cassandra", port: 9042).PublishAsConnectionString();
+IResourceBuilder<CassandraResource> cassandra =
+    builder.AddCassandra("cassandra", port: 9042).PublishAsConnectionString();
 
 builder.Build().Run();
