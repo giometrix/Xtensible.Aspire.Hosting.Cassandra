@@ -44,7 +44,7 @@ public static class CassandraBuilderExtensions
             .WithImage(cassandra.ImageSettings.Image, cassandra.ImageSettings.Tag)
             .WithImageRegistry(cassandra.ImageSettings.Registry)
             .WithEndpoint(port: port, targetPort: 9042, name: CassandraResource.PrimaryEndpointName, scheme: CassandraResource.PrimaryEndpointName)
-            .WithHealthCheck("cassandra"); // todo: figure out how to parameterize. figure out why this isn't working
-        return result; // todo: add health check
+            .WithHealthCheck(cassandra.Name);
+        return result;
     }
 }
