@@ -15,4 +15,21 @@ public class AppHostTests(CassandraTestAppHostFixture fixture) : IClassFixture<C
 
     }
 
+
+    [Fact]
+    public async Task cassandra_ready_for_requests()
+    {
+        try
+        {
+            using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(10));
+            var resource = await fixture.App.ResourceNotifications.WaitForResourceHealthyAsync("cassandra", WaitBehavior.StopOnResourceUnavailable, cts.Token);
+        }
+        catch (OperationCanceledException e)
+        {
+            Assert.Fail("Cassandra did not become healthy within 10 minutes");
+        }
+       
+       
+    }
+
 }

@@ -23,10 +23,12 @@ namespace Xtensible.Aspire.Hosting.Cassandra
 
             builder.Services.AddHealthChecks().AddAsyncCheck(name, async cancellationToken =>
             {
+                int port = int.TryParse(await resource.PrimaryEndpoint.Property(EndpointProperty.Port).GetValueAsync(cancellationToken), out int p) ? p : 9042;
+
                 var config = new CassandraHealthCheckConfig(
                     (await resource.PrimaryEndpoint.Property(EndpointProperty.Host).GetValueAsync(cancellationToken))!,
                     (await resource.UsernameReference.GetValueAsync(CancellationToken.None))!,
-                    (await resource.UsernameReference.GetValueAsync(CancellationToken.None))!, 9042);
+                    (await resource.UsernameReference.GetValueAsync(CancellationToken.None))!, port);
                 var healthCheck = new CassandraHealthCheck(config);
                 return await healthCheck.CheckHealthAsync(new HealthCheckContext(), cancellationToken);
             });
