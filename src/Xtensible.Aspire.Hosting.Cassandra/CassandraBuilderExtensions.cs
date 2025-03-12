@@ -10,16 +10,16 @@ namespace Xtensible.Aspire.Hosting.Cassandra
     {
         public static IResourceBuilder<CassandraResource> AddCassandra(this IDistributedApplicationBuilder builder,
             [ResourceName] string name,
-            IResourceBuilder<ParameterResource>? userName = null,
-            IResourceBuilder<ParameterResource>? password = null,
-            int? port = null,
-            string scheme = "tcp")
+            CassandraBuilderOptions? options = null)
         {
+
+            options ??= new CassandraBuilderOptions();
+
             ArgumentNullException.ThrowIfNull(builder, nameof(builder));
             ArgumentNullException.ThrowIfNull(name, nameof(name));
-            ArgumentNullException.ThrowIfNull(scheme, nameof(scheme));
+            ArgumentNullException.ThrowIfNull(options.Scheme, nameof(options.Scheme));
 
-            var resource = new CassandraResource(name, userName?.Resource, password?.Resource);
+            var resource = new CassandraResource(name, options.Username?.Resource, options.Password?.Resource);
 
             builder.Services.AddHealthChecks().AddAsyncCheck(name, async cancellationToken =>
             {
@@ -31,8 +31,19 @@ namespace Xtensible.Aspire.Hosting.Cassandra
                 return await healthCheck.CheckHealthAsync(new HealthCheckContext(), cancellationToken);
             });
 
+            if(options.OnResourceReadyAsync is not null)
+            {
+                builder.Eventing.Subscribe<ResourceReadyEvent>(async (e, c) =>
+                {
+                    if (e.Resource == resource)
+                    {
+                        await options.OnResourceReadyAsync(resource, c);
+                    }
+                });
+            }
 
-            return builder.Build(port, resource);
+
+            return builder.Build(options.Port, resource);
         }
 
         private static IResourceBuilder<CassandraResource> Build(this IDistributedApplicationBuilder builder, int? port,

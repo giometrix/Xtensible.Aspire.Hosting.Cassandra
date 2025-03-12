@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -7,7 +6,7 @@
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
-    <ItemGroup>
+    <ItemGroup>    
         <PackageReference Include="coverlet.collector" Version="6.0.4">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,8 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference
-            Include="..\..\src\Xtensible.Aspire.Hosting.Cassandra\Xtensible.Aspire.Hosting.Cassandra.csproj" />
+        <ProjectReference Include="..\..\src\Xtensible.Aspire.Hosting.Cassandra\Xtensible.Aspire.Hosting.Cassandra.csproj" />
     </ItemGroup>
 
     <ItemGroup>

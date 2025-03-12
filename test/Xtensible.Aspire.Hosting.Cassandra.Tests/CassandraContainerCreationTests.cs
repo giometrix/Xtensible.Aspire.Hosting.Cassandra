@@ -23,8 +23,12 @@ namespace Xtensible.Aspire.Hosting.Cassandra.Tests
         [Fact]
         public void add_cassandra_to_builder_should_not_have_null_or_whitespace_scheme()
         {
+            var options = new CassandraBuilderOptions
+            {
+                Scheme = null!
+            };
             IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder();
-            Assert.Throws<ArgumentNullException>(() => builder.AddCassandra("cassandra", scheme: null!));
+            Assert.Throws<ArgumentNullException>(() => builder.AddCassandra("cassandra", options));
         }
 
         [Fact]
@@ -32,8 +36,12 @@ namespace Xtensible.Aspire.Hosting.Cassandra.Tests
         {
             IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder();
 
-            builder.AddCassandra("cassandra", builder.AddParameter("username", "testuser"),
-                builder.AddParameter("password", "testpass"));
+            var options = new CassandraBuilderOptions
+            {
+                Username = builder.AddParameter("username", "testuser"),
+                Password = builder.AddParameter("password", "testpass")
+            };
+            builder.AddCassandra("cassandra", options);
 
             DistributedApplication app = builder.Build();
             var appModel = app.Services.GetRequiredService<DistributedApplicationModel>();
