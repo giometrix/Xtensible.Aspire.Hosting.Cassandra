@@ -14,6 +14,7 @@ IResourceBuilder<CassandraResource> cassandra =
     }).PublishAsConnectionString();
 
 // Consider using WithLifetime(ContainerLifetime.Persistent) to keep the container running after the application exits, Cassandra takes a minute to start up. 
+// also, you probably want to keep the data around after the container exits.
 //.WithLifetime(ContainerLifetime.Persistent);
 
 
