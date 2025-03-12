@@ -4,9 +4,12 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
+        <UserSecretsId>8e1cbf0b-640f-4df9-b114-e319df2b8601</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>    
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="9.1.0" />    
+        <PackageReference Include="Aspire.Hosting.Testing" Version="9.1.0" />    
         <PackageReference Include="coverlet.collector" Version="6.0.4">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -20,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\src\Xtensible.Aspire.Hosting.Cassandra.Demo\Xtensible.Aspire.Hosting.Cassandra.Demo.AppHost\Xtensible.Aspire.Hosting.Cassandra.Demo.AppHost.csproj" />
         <ProjectReference Include="..\..\src\Xtensible.Aspire.Hosting.Cassandra\Xtensible.Aspire.Hosting.Cassandra.csproj" />
     </ItemGroup>
 
