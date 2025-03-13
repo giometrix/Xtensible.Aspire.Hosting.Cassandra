@@ -52,6 +52,6 @@ namespace Xtensible.Aspire.Hosting.Cassandra
 
         /// <inheritdoc />
         public ReferenceExpression ConnectionStringExpression => ReferenceExpression.Create(
-            $"Contact Points={PrimaryEndpoint.Property(EndpointProperty.Host)}:{PrimaryEndpoint.Property(EndpointProperty.Port)};Username={UsernameReference};Password={PasswordReference}");
+            $"Contact Points={PrimaryEndpoint.Property(EndpointProperty.Host)};Port={PrimaryEndpoint.Property(EndpointProperty.Port)};Username={UsernameReference};Password={PasswordReference}");
     }
 }
