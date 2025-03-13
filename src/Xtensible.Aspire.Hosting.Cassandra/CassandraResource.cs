@@ -11,13 +11,12 @@ namespace Xtensible.Aspire.Hosting.Cassandra
     /// <param name="imageSettings">The image settings for the Cassandra container resource. Use null for default</param>
     public class CassandraResource(
         string name,
-        ParameterResource? userName = null,
-        ParameterResource? password = null,
+        ParameterResource userName,
+        ParameterResource password,
         CassandraImageSettings? imageSettings = null) : ContainerResource(name), IResourceWithConnectionString
     {
         internal const string PrimaryEndpointName = "tcp";
-        private const string DefaultUserName = "cassandra";
-        private const string DefaultPassword = "cassandra";
+       
 
         private EndpointReference? _primaryEndpoint;
 
@@ -45,13 +44,11 @@ namespace Xtensible.Aspire.Hosting.Cassandra
         public CassandraImageSettings ImageSettings { get; } = imageSettings ?? CassandraImageSettings.Default;
 
 
-        internal ReferenceExpression UsernameReference => UsernameParameter is not null
-            ? ReferenceExpression.Create($"{UsernameParameter}")
-            : ReferenceExpression.Create($"{DefaultUserName}");
+        internal ReferenceExpression UsernameReference => ReferenceExpression.Create($"{UsernameParameter}");
 
-        internal ReferenceExpression PasswordReference => PasswordParameter is not null
-            ? ReferenceExpression.Create($"{PasswordParameter}")
-            : ReferenceExpression.Create($"{DefaultPassword}");
+
+        internal ReferenceExpression PasswordReference => ReferenceExpression.Create($"{PasswordParameter}");
+
 
         /// <inheritdoc />
         public ReferenceExpression ConnectionStringExpression => ReferenceExpression.Create(

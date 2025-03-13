@@ -38,8 +38,8 @@ namespace Xtensible.Aspire.Hosting.Cassandra.Tests
 
             var options = new CassandraBuilderOptions
             {
-                Username = builder.AddParameter("username", "testuser"),
-                Password = builder.AddParameter("password", "testpass")
+                Username = builder.AddParameter("username", "testuser").Resource,
+                Password = builder.AddParameter("password", "testpass").Resource
             };
             builder.AddCassandra("cassandra", options);
 

@@ -10,16 +10,17 @@ namespace Xtensible.Aspire.Hosting.Cassandra
     {
         public static IResourceBuilder<CassandraResource> AddCassandra(this IDistributedApplicationBuilder builder,
             [ResourceName] string name,
-            CassandraBuilderOptions? options = null)
+            CassandraBuilderOptions? options = null, CassandraImageSettings? imageSettings = null)
         {
 
             options ??= new CassandraBuilderOptions();
+            imageSettings ??= CassandraImageSettings.Default;
 
             ArgumentNullException.ThrowIfNull(builder, nameof(builder));
             ArgumentNullException.ThrowIfNull(name, nameof(name));
             ArgumentNullException.ThrowIfNull(options.Scheme, nameof(options.Scheme));
 
-            var resource = new CassandraResource(name, options.Username?.Resource, options.Password?.Resource);
+            var resource = new CassandraResource(name, options.Username, options.Password, imageSettings);
 
             builder.Services.AddHealthChecks().AddAsyncCheck(name, async cancellationToken =>
             {
@@ -46,6 +47,15 @@ namespace Xtensible.Aspire.Hosting.Cassandra
 
 
             return builder.Build(options.Port, resource);
+        }
+
+        public static IResourceBuilder<CassandraResource> AddScylla(this IDistributedApplicationBuilder builder,
+            [ResourceName] string name,
+            CassandraBuilderOptions? options = null, ScyllaImageSettings? imageSettings = null)
+        {
+            imageSettings ??= ScyllaImageSettings.Default;
+
+            return AddCassandra(builder, name, options, imageSettings);
         }
 
         private static IResourceBuilder<CassandraResource> Build(this IDistributedApplicationBuilder builder, int? port,
