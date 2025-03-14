@@ -1,6 +1,6 @@
 # Xtensible.Aspire.Hosting.Cassandra
 
-This project provides Cassandra and Scylla support for .NET Aspire applications. It allows you to easily add and configure Cassandra or Scylla databases to your Aspire application using the `AddCassandra` and `AddScylla` extension methods.
+This project provides [Cassandra](https://cassandra.apache.org/_/index.html) and [Scylla](https://www.scylladb.com/) support for [.NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/get-started/aspire-overview). It allows you to easily add and configure Cassandra or Scylla databases to your Aspire application using the `AddCassandra` and `AddScylla` extension methods.
 
 ## Purpose
 
