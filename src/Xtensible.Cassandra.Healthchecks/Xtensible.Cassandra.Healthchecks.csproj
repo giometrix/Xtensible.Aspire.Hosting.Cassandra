@@ -10,6 +10,8 @@
         <RepositoryUrl>https://github.com/giometrix/Xtensible.Aspire.Hosting.Cassandra</RepositoryUrl>
         <PackageTags>cassandra scylla healthcheck</PackageTags>
         <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+        <IncludeSymbols>True</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
 
     <ItemGroup>
