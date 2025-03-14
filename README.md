@@ -1,5 +1,5 @@
 # Xtensible.Aspire.Hosting.Cassandra
-[![NuGet Version](https://img.shields.io/nuget/v/Xtensible.Cassandra.Healthchecks)](https://www.nuget.org/packages/Xtensible.Cassandra.Healthchecks)
+[![NuGet Version](https://img.shields.io/nuget/v/Xtensible.Aspire.Hosting.Cassandra)](https://www.nuget.org/packages/Xtensible.Aspire.Hosting.Cassandra)
 
 This project provides [Cassandra](https://cassandra.apache.org/_/index.html) and [Scylla](https://www.scylladb.com/) support for [.NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/get-started/aspire-overview). It allows you to easily add and configure Cassandra or Scylla databases to your Aspire application using the `AddCassandra` and `AddScylla` extension methods.
 
