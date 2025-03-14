@@ -7,7 +7,20 @@
     <Title></Title>
     <Description>Cassandra and Scylla support for Aspire</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/giometrix/Xtensible.Aspire.Hosting.Cassandra</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/giometrix/Xtensible.Aspire.Hosting.Cassandra</RepositoryUrl>
+    <PackageTags>aspire cassandra scylla</PackageTags>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting" Version="9.1.0" />

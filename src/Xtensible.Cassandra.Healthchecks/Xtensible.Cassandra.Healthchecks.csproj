@@ -6,6 +6,10 @@
         <Nullable>enable</Nullable>
         <Description>Healthchecks for Cassandra and Scylla</Description>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <PackageProjectUrl>https://github.com/giometrix/Xtensible.Aspire.Hosting.Cassandra</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/giometrix/Xtensible.Aspire.Hosting.Cassandra</RepositoryUrl>
+        <PackageTags>cassandra scylla healthcheck</PackageTags>
+        <PackageReleaseNotes>Initial release</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
