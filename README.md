@@ -33,7 +33,7 @@ IResourceBuilder<CassandraResource> cassandra =
 builder.Build().Run();
 ```
 
-This code adds a Cassandra resource named "cassandra" to your application. It also configures the port to 9042 and publishes the connection string as a service.
+This code adds a Cassandra resource named "cassandra" to your application.
 
 Adding Scylla to your Aspire AppHost
 To add a Scylla database, which is a Cassandra-compatible database, you can use the AddScylla extension method. This uses the scylladb/scylla docker image by default
